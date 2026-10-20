@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coleta dos Reinos — Aventura da Vida</title>
+<style>
+:root{--ink:#123b38;--green:#167c62;--mint:#dff7e9;--cream:#fff8e8;--gold:#ffca58;--coral:#ff795e;--blue:#63c8df;--shadow:0 12px 30px #153e3320}
+*{box-sizing:border-box}body{margin:0;font-family:ui-rounded,"Trebuchet MS",system-ui,sans-serif;color:var(--ink);background:radial-gradient(circle at 10% 5%,#e3fff0,transparent 35%),linear-gradient(135deg,#f7ffe9,#d5f4e6);min-height:100vh}
+button{font:inherit;cursor:pointer;border:0;transition:transform .15s,filter .15s}button:hover{filter:brightness(1.04);transform:translateY(-2px)}button:focus-visible{outline:3px solid #ffb52e;outline-offset:3px}
+.shell{max-width:1120px;margin:auto;padding:18px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.brand{display:flex;align-items:center;gap:12px}.logo{font-size:2.6rem;filter:drop-shadow(0 4px 2px #174e2c20)}h1{font-size:clamp(1.35rem,3vw,2.1rem);margin:0;letter-spacing:-.04em}.tagline{font-size:.9rem;opacity:.7;margin-top:2px}.pill{background:#fff;padding:9px 14px;border-radius:99px;font-weight:800;box-shadow:0 3px 0 #164e3910}
+main{margin-top:18px}.screen{display:none}.screen.active{display:block}.panel{background:#ffffffd9;border:1px solid #ffffff;box-shadow:var(--shadow);border-radius:26px;padding:clamp(18px,4vw,32px)}.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center;overflow:hidden;position:relative}.hero h2{font-size:clamp(2rem,5vw,3.6rem);line-height:1.02;letter-spacing:-.055em;margin:8px 0 14px}.hero p{font-size:1.05rem;line-height:1.6;max-width:570px}.eyebrow{font-size:.76rem;text-transform:uppercase;letter-spacing:.16em;font-weight:900;color:var(--green)}.primary{background:var(--green);color:white;padding:14px 22px;border-radius:15px;font-weight:900;box-shadow:0 5px 0 #0d5b48}.secondary{background:#e7f7ee;color:var(--ink);padding:12px 17px;border-radius:14px;font-weight:800}.art{min-height:280px;border-radius:24px;background:linear-gradient(#a5e5df 0 48%,#8bd78a 48%);display:flex;align-items:center;justify-content:center;position:relative;font-size:clamp(2.7rem,6vw,5rem);overflow:hidden}.art:before{content:"";position:absolute;bottom:-25px;left:-15px;width:65%;height:45%;background:#45a96f;border-radius:50%}.art:after{content:"";position:absolute;right:-15px;bottom:-40px;width:70%;height:55%;background:#27986b;border-radius:50%}.art span{position:relative;z-index:1;filter:drop-shadow(0 8px 3px #144c3520);animation:float 3s ease-in-out infinite}.art span:nth-child(2){animation-delay:.4s}.art span:nth-child(3){animation-delay:.8s}@keyframes float{50%{transform:translateY(-12px) rotate(4deg)}}
+.section-title{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:22px 2px 12px}.section-title h2{margin:0;font-size:1.35rem}.muted{opacity:.7}.kingdom-grid,.biome-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}.choice{padding:17px 14px;border-radius:18px;background:white;border:2px solid transparent;box-shadow:0 5px 0 #164e3910;text-align:left;color:var(--ink)}.choice.selected{border-color:var(--green);background:#e6faed}.choice .emoji{font-size:2.25rem;display:block;margin-bottom:8px}.choice strong{display:block;font-size:1.03rem}.choice small{display:block;opacity:.68;margin-top:4px}.row-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.game-head{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:12px;margin-bottom:14px}.target{background:var(--gold);border-radius:16px;padding:12px 16px;font-weight:1000;font-size:1.15rem}.stat{background:white;border-radius:14px;padding:10px 13px;text-align:center;font-weight:900;min-width:75px}.stat small{display:block;font-size:.68rem;text-transform:uppercase;opacity:.6}.arena{height:min(54vh,480px);min-height:340px;border-radius:24px;position:relative;overflow:hidden;background:linear-gradient(#a9e5f3 0 47%,#9bdf91 47% 100%);border:4px solid #fff;box-shadow:inset 0 -15px 0 #4caf7030}.arena.ocean{background:linear-gradient(#8fe4f0,#2a9db9)}.arena.desert{background:linear-gradient(#ffdf9a,#e6ad5e)}.arena.arctic{background:linear-gradient(#e6fbff,#9acde0)}.arena.micro{background:radial-gradient(circle,#d6fff5,#76d9c8)}.sun{position:absolute;right:6%;top:7%;font-size:2.4rem;opacity:.8}.hill{position:absolute;bottom:-55px;width:75%;height:150px;border-radius:50%;background:#5bbd75;left:-10%}.hill.two{left:45%;background:#39a967;bottom:-75px}.creature{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;width:86px;height:88px;border-radius:22px;background:#ffffffed;box-shadow:0 5px 0 #164e3920;border:2px solid #fff;user-select:none;touch-action:manipulation;animation:bob 2.2s ease-in-out infinite}.creature .emoji{font-size:2.55rem;line-height:1}.creature small{font-size:.66rem;font-weight:900;margin-top:3px;max-width:80px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.creature:hover{z-index:3;transform:scale(1.08)}@keyframes bob{50%{margin-top:-7px}}.creature.good{animation:pop .3s forwards}.creature.bad{animation:shake .25s}@keyframes pop{to{transform:scale(1.45);opacity:0}}@keyframes shake{25%,75%{transform:translateX(-5px)}50%{transform:translateX(5px)}}.game-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:14px}.powerups{display:flex;gap:8px;flex-wrap:wrap}.power{background:white;border-radius:13px;padding:10px 12px;font-weight:800}.feedback{min-height:26px;font-weight:900}.progress{height:8px;border-radius:99px;background:#d3e8dd;overflow:hidden;margin:10px 0 16px}.progress div{height:100%;width:100%;background:var(--green);transition:width .25s}.result{text-align:center}.result .big{font-size:4rem}.result h2{font-size:2.3rem;margin:4px}.result-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}.result-stats div{background:#f0fbf3;border-radius:17px;padding:16px}.result-stats strong{display:block;font-size:1.7rem}.catalog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}.specimen{background:white;border-radius:18px;padding:16px;text-align:center;box-shadow:0 4px 0 #164e3910}.specimen .emoji{font-size:2.6rem}.specimen h3{margin:7px 0 3px}.specimen p{margin:4px 0;font-size:.86rem;line-height:1.4}.badge{display:inline-block;background:#e5f6ec;border-radius:99px;padding:4px 9px;font-size:.75rem;font-weight:900}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#123b38;color:white;padding:12px 18px;border-radius:14px;box-shadow:var(--shadow);z-index:20;display:none}.toast.show{display:block}.footer-note{text-align:center;padding:18px;font-size:.8rem;opacity:.6}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}\n@media(max-width:700px){.hero{grid-template-columns:1fr}.art{min-height:190px;order:-1}.game-head{grid-template-columns:1fr 1fr}.target{grid-column:1/-1}.arena{min-height:390px;height:54vh}.creature{width:72px;height:76px}.creature .emoji{font-size:2.1rem}.result-stats{grid-template-columns:1fr 1fr}.result-stats div:last-child{grid-column:1/-1}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="topbar">
+ <div class="brand"><div class="logo">🌎</div><div><h1>Coleta dos Reinos</h1><div class="tagline">Aventura da Vida · aprender brincando</div></div></div>
+ <div class="pill">🔬 Nível <span id="levelLabel">1</span> · ⭐ <span id="xpLabel">0</span> XP · 🗺️ Fase <span id="stageLabel">1</span></div>
+</header>
+<main>
+<section id="home" class="screen active">
+ <div class="panel hero">
+  <div><div class="eyebrow">Missão de hoje: explorar a vida</div><p><button class="secondary" onclick="toggleSound()">🔊 Som: <span id="soundLabel">ligado</span></button></p><h2>Pequenos toques.<br>Grandes descobertas.</h2><p>Encontre os seres vivos que pertencem ao reino indicado. Acerte, forme combos, desbloqueie biomas e monte seu Catálogo Vivo!</p><button class="primary" onclick="showScreen('setup')">🚀 Começar aventura</button> <button class="secondary" onclick="showCatalog()">📚 Catálogo Vivo</button> <button class="secondary" onclick="showClassroom()">🧑‍🏫 Modo Aula</button></div>
+  <div class="art"><span>🦋</span><span>🍄</span><span>🌿</span></div>
+ </div>
+ <div class="section-title"><h2>Como jogar</h2><span class="muted">30 segundos por rodada</span></div>
+ <div class="panel"><p>🎯 <b>Objetivo:</b> toque ou clique apenas nos organismos do reino pedido.</p><p>✨ <b>Combo:</b> acertos seguidos aumentam seus pontos.</p><p>🧪 <b>Poderes:</b> use a lupa para destacar alvos ou congele a tela por alguns segundos.</p><p>🌱 <b>Aprenda:</b> cada descoberta entra no catálogo com uma curiosidade científica.</p><p>💾 <b>Progresso salvo:</b> XP, fase e catálogo ficam guardados neste navegador.</p></div>
+</section>
+<section id="setup" class="screen">
+ <div class="panel">
+  <div class="eyebrow">Preparar expedição</div><h2>Escolha seu desafio</h2><p class="muted">Comece com um reino ou misture todos para um desafio maior.</p>
+  <div class="section-title"><h2>1. Reino-alvo</h2></div>
+  <div class="kingdom-grid" id="kingdomChoices"></div>
+  <div class="section-title"><h2>2. Bioma</h2></div>
+  <div class="biome-grid" id="biomeChoices"></div>
+  <div class="row-actions"><button class="primary" onclick="startGame()">▶ Iniciar coleta</button><button class="secondary" onclick="showScreen('home')">Voltar</button></div>
+ </div>
+</section>
+<section id="game" class="screen">
+ <div class="game-head">
+  <div class="target">🎯 COLETE: <span id="targetName">ANIMAIS</span></div>
+  <div class="stat"><small>Tempo</small><span id="time">30</span>s</div>
+  <div class="stat"><small>Pontos</small><span id="score">0</span></div>
+ </div>
+ <div class="progress"><div id="timeBar"></div></div>
+ <div id="arena" class="arena"><div class="sun" id="sun">☀️</div><div class="hill"></div><div class="hill two"></div></div>
+ <div class="game-footer"><div class="feedback" id="feedback" aria-live="polite">Toque somente nos organismos corretos!</div><div class="powerups"><button class="power" id="hintBtn" onclick="useHint()">🔎 Lupa <span id="hintCount">2</span></button><button class="power" id="freezeBtn" onclick="useFreeze()">⏱️ Pausar tudo <span id="freezeCount">1</span></button></div></div>
+ <div class="row-actions"><button class="secondary" onclick="endGame(true)">⏸ Encerrar rodada</button></div>
+</section>
+<section id="result" class="screen">
+ <div class="panel result"><div class="big" id="resultEmoji">🏆</div><div class="eyebrow">Expedição concluída</div><h2 id="resultTitle">Muito bem, explorador!</h2><p id="resultMessage">Você ampliou seu conhecimento sobre a vida.</p>
+ <div class="result-stats"><div>🎯 <strong id="finalScore">0</strong><span>Pontos</span></div><div>✅ <strong id="finalHits">0</strong><span>Acertos</span></div><div>🧠 <strong id="finalAccuracy">0%</strong><span>Precisão</span></div></div>
+ <div class="panel" style="box-shadow:none;background:#f0fbf3"><b>💡 Curiosidade científica</b><p id="factText">Os fungos são diferentes das plantas: eles não produzem seu próprio alimento por fotossíntese.</p></div>
+ <div class="row-actions" style="justify-content:center"><button class="primary" onclick="nextStage()">➡️ Próxima fase</button><button class="secondary" onclick="showScreen('setup')">🔁 Repetir fase</button><button class="secondary" onclick="showCatalog()">📚 Ver catálogo</button><button class="secondary" onclick="showScreen('home')">🏠 Menu</button></div></div>
+</section>
+<section id="catalog" class="screen">
+ <div class="panel"><div class="eyebrow">Museu pessoal da biodiversidade</div><h2>📚 Catálogo Vivo</h2><p class="muted">Os organismos que você descobriu ficam registrados aqui. Jogue para ampliar a coleção.</p><div id="catalogStats" class="pill" style="display:inline-block;margin:8px 0 18px">0 descobertas</div><div id="catalogGrid" class="catalog-grid"></div><div class="row-actions"><button class="primary" onclick="showScreen('setup')">Continuar explorando</button><button class="secondary" onclick="showScreen('home')">Voltar ao menu</button></div></div>
+</section>
+<section id="classroom" class="screen">
+ <div class="panel"><div class="eyebrow">Ferramenta para educadores</div><h2>🧑‍🏫 Modo Aula</h2>
+ <p>Use o jogo como atividade coletiva. Os dados ficam neste navegador e podem ser copiados para um registro do professor.</p>
+ <div class="result-stats"><div>🌿 <strong id="classSeen">0</strong><span>Organismos descobertos</span></div><div>⭐ <strong id="classXp">0</strong><span>XP acumulado</span></div><div>🗺️ <strong id="classStage">1</strong><span>Fase alcançada</span></div></div>
+ <label for="className"><b>Nome da turma ou grupo</b></label><br><input id="className" placeholder="Ex.: 7º ano A" style="margin:8px 0;padding:12px;border-radius:12px;border:1px solid #bdd8c9;width:min(100%,400px);font:inherit">
+ <div class="row-actions"><button class="primary" onclick="copyClassReport()">📋 Copiar relatório</button><button class="secondary" onclick="downloadClassReport()">⬇️ Baixar relatório .txt</button><button class="secondary" onclick="showScreen('setup')">Começar atividade</button><button class="secondary" onclick="showScreen('home')">Voltar</button></div>
+ <p class="muted" style="font-size:.85rem">Privacidade: este protótipo não envia dados para a internet. O relatório é gerado no seu dispositivo.</p></div>
+</section>
+</main>
+<div class="footer-note">Coleta dos Reinos · protótipo educativo · classificação simplificada para fins de jogo</div>
+</div><div id="toast" class="toast" role="status"></div>
+<script>
+const kingdoms=[
+ {id:'animal',name:'Animais',emoji:'🦁',desc:'Movimento e diversidade animal'},
+ {id:'planta',name:'Plantas',emoji:'🌿',desc:'Fotossíntese e vida vegetal'},
+ {id:'fungo',name:'Fungos',emoji:'🍄',desc:'Cogumelos, bolores e leveduras'},
+ {id:'protista',name:'Protistas',emoji:'🦠',desc:'Muitos são microscópicos'},
+ {id:'bacteria',name:'Bactérias',emoji:'🧫',desc:'Microrganismos procariontes'},
+ {id:'todos',name:'Todos os reinos',emoji:'🌎',desc:'Desafio avançado'}
+];
+const biomes=[
+ {id:'forest',name:'Floresta',emoji:'🌳',desc:'Verde e cheia de vida'},
+ {id:'ocean',name:'Oceano',emoji:'🌊',desc:'Mistérios submarinos'},
+ {id:'desert',name:'Deserto',emoji:'🏜️',desc:'Vida em condições extremas'},
+ {id:'arctic',name:'Ártico',emoji:'❄️',desc:'Frio e adaptações incríveis'},
+ {id:'micro',name:'Microscópico',emoji:'🔬',desc:'Um mundo invisível'}
+];
+const organisms=[
+ {id:'borboleta',name:'Borboleta',emoji:'🦋',kingdom:'animal',habitats:['forest'],fact:'As borboletas percebem sabores com sensores localizados nas patas.'},
+ {id:'peixe',name:'Peixe',emoji:'🐟',kingdom:'animal',habitats:['ocean'],fact:'Os peixes obtêm oxigênio dissolvido na água principalmente pelas brânquias.'},
+ {id:'raposa',name:'Raposa',emoji:'🦊',kingdom:'animal',habitats:['forest','arctic'],fact:'As raposas usam a audição aguçada para localizar presas.'},
+ {id:'tartaruga',name:'Tartaruga',emoji:'🐢',kingdom:'animal',habitats:['ocean','desert'],fact:'Tartarugas de diferentes espécies vivem em ambientes marinhos, terrestres e de água doce.'},
+ {id:'coruja',name:'Coruja',emoji:'🦉',kingdom:'animal',habitats:['forest','arctic'],fact:'Muitas corujas conseguem localizar sons com grande precisão.'},
+ {id:'polvo',name:'Polvo',emoji:'🐙',kingdom:'animal',habitats:['ocean'],fact:'Polvos têm oito braços e são conhecidos por sua capacidade de resolver problemas.'},
+ {id:'cacto',name:'Cacto',emoji:'🌵',kingdom:'planta',habitats:['desert'],fact:'Muitos cactos armazenam água em seus tecidos e têm espinhos que ajudam a reduzir a perda de água.'},
+ {id:'samambaia',name:'Samambaia',emoji:'🌿',kingdom:'planta',habitats:['forest'],fact:'Samambaias se reproduzem por esporos, e não por sementes.'},
+ {id:'flor',name:'Flor',emoji:'🌼',kingdom:'planta',habitats:['forest','desert'],fact:'As flores podem atrair polinizadores com cores, formas e aromas.'},
+ {id:'arvore',name:'Árvore',emoji:'🌳',kingdom:'planta',habitats:['forest','arctic'],fact:'Árvores oferecem abrigo e alimento a muitos outros organismos.'},
+ {id:'alga',name:'Alga',emoji:'🪸',kingdom:'protista',habitats:['ocean','micro'],fact:'Algas de muitos grupos fazem fotossíntese e contribuem para a produção de oxigênio.'},
+ {id:'ameba',name:'Ameba',emoji:'🫧',kingdom:'protista',habitats:['micro'],fact:'Amebas podem mudar de forma e se deslocar usando extensões chamadas pseudópodes.'},
+ {id:'paramécio',name:'Paramécio',emoji:'🦠',kingdom:'protista',habitats:['micro'],fact:'O paramécio usa pequenos cílios para se locomover na água.'},
+ {id:'cogumelo',name:'Cogumelo',emoji:'🍄',kingdom:'fungo',habitats:['forest','arctic'],fact:'O cogumelo é uma estrutura reprodutiva de certos fungos; grande parte do organismo pode estar no substrato.'},
+ {id:'levedura',name:'Levedura',emoji:'🧁',kingdom:'fungo',habitats:['micro'],fact:'Leveduras são fungos unicelulares; algumas são usadas na produção de pães.'},
+ {id:'bolor',name:'Bolor',emoji:'🟢',kingdom:'fungo',habitats:['forest','micro'],fact:'Muitos bolores são fungos que formam filamentos e produzem esporos.'},
+ {id:'bacteria1',name:'Bactéria',emoji:'🧫',kingdom:'bacteria',habitats:['micro','ocean','desert'],fact:'Bactérias vivem em muitos ambientes; algumas são úteis, outras podem causar doenças.'},
+ {id:'cianobacteria',name:'Cianobactéria',emoji:'🔵',kingdom:'bacteria',habitats:['ocean','micro'],fact:'Cianobactérias realizam fotossíntese e têm papel importante na história da vida na Terra.'}
+];
+const SAVE_KEY='coletaDosReinosSaveV1';
+function loadSave(){try{return JSON.parse(localStorage.getItem(SAVE_KEY)||'{}')}catch(e){return {}}}
+const saved=loadSave();
+let selectedKingdom='animal',selectedBiome='forest',score=0,hits=0,misses=0,combo=0,bestCombo=0,timeLeft=30,gameTimer=null,spawnTimer=null,freezeTimeout=null,hints=2,freezes=1,active=false,xp=Number(saved.xp)||0,level=Number(saved.level)||1,stage=Number(saved.stage)||1,seen=new Set(Array.isArray(saved.seen)?saved.seen:[]),attempts=0,roundSeconds=30,soundOn=saved.soundOn!==false;
+const $=id=>document.getElementById(id);
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));$(id).classList.add('active');}
+function saveProgress(){
+ try{localStorage.setItem(SAVE_KEY,JSON.stringify({xp,level,stage,seen:[...seen],soundOn}));}catch(e){}
+}
+function syncHeader(){$('xpLabel').textContent=xp;$('levelLabel').textContent=level;$('stageLabel').textContent=stage;$('soundLabel').textContent=soundOn?'ligado':'desligado';}
+function tone(freq=660,duration=.09,type='sine'){
+ if(!soundOn)return;
+ try{const Ctx=window.AudioContext||window.webkitAudioContext;if(!Ctx)return;const ctx=new Ctx(),osc=ctx.createOscillator(),gain=ctx.createGain();osc.type=type;osc.frequency.value=freq;gain.gain.setValueAtTime(.07,ctx.currentTime);gain.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+duration);osc.connect(gain);gain.connect(ctx.destination);osc.start();osc.stop(ctx.currentTime+duration);osc.onended=()=>ctx.close();}catch(e){}
+}
+function toggleSound(){soundOn=!soundOn;saveProgress();syncHeader();showToast(soundOn?'Sons ativados':'Sons desativados');}
+function showClassroom(){
+ $('classSeen').textContent=seen.size;$('classXp').textContent=xp;$('classStage').textContent=stage;showScreen('classroom');
+}
+function classReport(){
+ const group=($('className').value||'Turma não informada').trim();
+ const names=[...seen].map(id=>organisms.find(o=>o.id===id)).filter(Boolean).map(o=>`${o.name} — ${kingdoms.find(k=>k.id===o.kingdom)?.name||o.kingdom}`);
+ return `COLETA DOS REINOS — RELATÓRIO DE ATIVIDADE\nTurma/grupo: ${group}\nData: ${new Date().toLocaleDateString('pt-BR')}\nFase alcançada: ${stage}\nXP acumulado: ${xp}\nOrganismos descobertos: ${seen.size}/${organisms.length}\n\nCATÁLOGO DESCOBERTO:\n${names.length?names.join('\\n'):'Nenhum organismo descoberto ainda.'}\n\nObservação: registro local do protótipo; não representa avaliação individual de estudantes.`;
+}
+async function copyClassReport(){const report=classReport();try{await navigator.clipboard.writeText(report);showToast('Relatório copiado!')}catch(e){const ta=document.createElement('textarea');ta.value=report;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();showToast('Relatório copiado!')}}
+function downloadClassReport(){const blob=new Blob([classReport()],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='relatorio-coleta-dos-reinos.txt';a.click();URL.revokeObjectURL(url);showToast('Relatório preparado para baixar')}
+function nextStage(){stage++;selectedKingdom=kingdoms[(stage-1)%5].id;roundSeconds=Math.min(60,30+Math.floor((stage-1)/2)*5);buildChoices();saveProgress();syncHeader();showScreen('setup');showToast(`Fase ${stage}: novo desafio!`)}
+function buildChoices(){
+ $('kingdomChoices').innerHTML=kingdoms.map(k=>`<button class="choice ${k.id===selectedKingdom?'selected':''}" onclick="selectKingdom('${k.id}')"><span class="emoji">${k.emoji}</span><strong>${k.name}</strong><small>${k.desc}</small></button>`).join('');
+ $('biomeChoices').innerHTML=biomes.map(b=>`<button class="choice ${b.id===selectedBiome?'selected':''}" onclick="selectBiome('${b.id}')"><span class="emoji">${b.emoji}</span><strong>${b.name}</strong><small>${b.desc}</small></button>`).join('');
+}
+function selectKingdom(id){selectedKingdom=id;buildChoices()}
+function selectBiome(id){selectedBiome=id;buildChoices()}
+function showToast(msg){$('toast').textContent=msg;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),1700)}
+function poolForBiome(){let p=organisms.filter(o=>o.habitats.includes(selectedBiome));if(selectedKingdom!=='todos'&&!p.some(o=>o.kingdom===selectedKingdom)){p=p.concat(organisms.filter(o=>o.kingdom===selectedKingdom));}return p}
+function isTarget(o){return selectedKingdom==='todos'||o.kingdom===selectedKingdom}
+function startGame(){
+ clearInterval(gameTimer);clearInterval(spawnTimer);active=true;score=0;hits=0;misses=0;combo=0;bestCombo=0;attempts=0;timeLeft=roundSeconds;hints=2;freezes=1;
+ $('targetName').textContent=selectedKingdom==='todos'?'QUALQUER REINO':kingdoms.find(k=>k.id===selectedKingdom).name.toUpperCase();
+ $('score').textContent='0';$('time').textContent=String(roundSeconds);$('feedback').textContent='Toque somente nos organismos corretos!';$('hintCount').textContent=hints;$('freezeCount').textContent=freezes;
+ $('arena').className='arena '+selectedBiome;document.querySelectorAll('#arena .creature').forEach(e=>e.remove());$('sun').textContent=({forest:'☀️',ocean:'🫧',desert:'☀️',arctic:'❄️',micro:'🔬'})[selectedBiome];
+ showScreen('game');spawnCreature();spawnTimer=setInterval(spawnCreature,850);
+ gameTimer=setInterval(()=>{if(!active)return;timeLeft--; $('time').textContent=timeLeft;$('timeBar').style.width=(timeLeft/roundSeconds*100)+'%';if(timeLeft<=0)endGame(false)},1000);
+}
+function spawnCreature(){
+ if(!active)return;const arena=$('arena'),pool=poolForBiome();const o=pool[Math.floor(Math.random()*pool.length)];const el=document.createElement('button');el.className='creature';el.setAttribute('aria-label',o.name);el.innerHTML=`<span class="emoji">${o.emoji}</span><small>${o.name}</small>`;
+ const maxX=Math.max(0,arena.clientWidth-88),maxY=Math.max(0,arena.clientHeight-92);el.style.left=(8+Math.random()*Math.max(0,maxX-16))+'px';el.style.top=(45+Math.random()*Math.max(0,maxY-45))+'px';
+ el.onclick=()=>collect(el,o);arena.appendChild(el);
+ setTimeout(()=>{if(el.isConnected)el.remove()},4800);
+}
+function collect(el,o){
+ if(!active||!el.isConnected)return;attempts++;
+ if(isTarget(o)){hits++;tone(720+Math.min(combo,8)*35,.1);combo++;bestCombo=Math.max(bestCombo,combo);let gain=10+Math.min(combo,10)*2;score+=gain;if(combo>0&&combo%5===0){score+=20;showToast('🔥 Combo de '+combo+'! +20 bônus');}$('feedback').textContent=`✅ ${o.name}! +${gain} pontos`;el.classList.add('good');seen.add(o.id);xp+=2;saveProgress();}
+ else{misses++;tone(180,.16,'triangle');combo=0;score=Math.max(0,score-5);$('feedback').textContent=`↩️ Esse ser pertence a ${kingdoms.find(k=>k.id===o.kingdom)?.name||'outro grupo'}. −5 pontos`;el.classList.add('bad');}
+ $('score').textContent=score;setTimeout(()=>el.remove(),180);
+ $('xpLabel').textContent=xp;level=1+Math.floor(xp/50);$('levelLabel').textContent=level;saveProgress();
+}
+function useHint(){if(!active||hints<=0)return;hints--;$('hintCount').textContent=hints;let found=false;document.querySelectorAll('#arena .creature').forEach(el=>{const name=el.getAttribute('aria-label'),o=organisms.find(x=>x.name===name);if(o&&isTarget(o)){el.style.outline='4px solid #ffca58';el.style.boxShadow='0 0 0 7px #ffca5866';found=true;}});$('feedback').textContent=found?'🔎 Alvos destacados por alguns segundos!':'🔎 Aguarde aparecer um organismo do reino-alvo.';setTimeout(()=>document.querySelectorAll('#arena .creature').forEach(el=>{el.style.outline='';el.style.boxShadow=''}),2200)}
+function useFreeze(){if(!active||freezes<=0)return;freezes--;$('freezeCount').textContent=freezes;const wasActive=active;clearInterval(spawnTimer);$('feedback').textContent='⏱️ Tempo de jogo congelado por 4 segundos!';const previous=gameTimer;clearInterval(previous);freezeTimeout=setTimeout(()=>{if(!active)return;gameTimer=setInterval(()=>{timeLeft--;$('time').textContent=timeLeft;$('timeBar').style.width=(timeLeft/roundSeconds*100)+'%';if(timeLeft<=0)endGame(false)},1000);spawnTimer=setInterval(spawnCreature,850);},4000)}
+function endGame(manual){
+ if(!active)return;active=false;clearInterval(gameTimer);clearInterval(spawnTimer);clearTimeout(freezeTimeout);
+ xp+=Math.max(0,Math.floor(score/10));level=1+Math.floor(xp/50);saveProgress();syncHeader();
+ $('finalScore').textContent=score;$('finalHits').textContent=hits;$('finalAccuracy').textContent=(attempts?Math.round(hits/attempts*100):0)+'%';
+ $('resultEmoji').textContent=hits>=12?'🏆':hits>=5?'🔬':'🌱';$('resultTitle').textContent=hits>=12?'Explorador brilhante!':hits>=5?'Boa descoberta!':'Toda descoberta começa assim!';
+ $('resultMessage').textContent=`Você fez ${hits} coleta(s) correta(s), com ${misses} erro(s), e chegou ao combo de ${bestCombo}. ${manual?'Rodada encerrada por você.':'O tempo acabou.'}`;
+ let facts=organisms.filter(o=>selectedKingdom==='todos'||o.kingdom===selectedKingdom);if(!facts.length)facts=organisms;const f=facts[Math.floor(Math.random()*facts.length)];$('factText').textContent=f.fact;
+ showScreen('result');
+}
+function showCatalog(){
+ $('catalogStats').textContent=`${seen.size} de ${organisms.length} organismos descobertos`;
+ const items=organisms.filter(o=>seen.has(o.id));
+ $('catalogGrid').innerHTML=items.length?items.map(o=>`<article class="specimen"><div class="emoji">${o.emoji}</div><h3>${o.name}</h3><span class="badge">${kingdoms.find(k=>k.id===o.kingdom)?.name||o.kingdom}</span><p>${o.fact}</p></article>`).join(''):'<div class="specimen" style="grid-column:1/-1"><div class="emoji">🧭</div><h3>Sua coleção começa agora!</h3><p>Jogue uma rodada e toque nos organismos corretos para adicioná-los ao catálogo.</p></div>';
+ showScreen('catalog');
+}
+buildChoices();syncHeader();
+</script>
+</body>
+</html>
