@@ -30,14 +30,18 @@ Não é preciso instalar dependências. Para executar localmente, baixe o reposi
 
 ### Ativar o GitHub Pages
 
+O repositório inclui um fluxo de publicação automática em `.github/workflows/pages.yml`. Para ativar o site:
+
 1. Abra **Settings** neste repositório.
 2. Entre em **Pages**.
-3. Em **Build and deployment**, escolha **Deploy from a branch**.
-4. Selecione a branch **main** e a pasta **/(root)** e clique em **Save**.
-5. Aguarde o GitHub publicar o site. O endereço deverá ser:
-   https://lucksk-72.github.io/coleta-dos-reinos/
+3. Em **Build and deployment → Source**, selecione **GitHub Actions**.
+4. Se solicitado, autorize as permissões de Pages para o fluxo.
+5. Abra a aba **Actions** e acompanhe o fluxo **Deploy to GitHub Pages**. A primeira publicação pode levar alguns minutos.
 
-Se o endereço não aparecer imediatamente, aguarde alguns minutos e atualize a página de Settings → Pages. Novos commits na branch `main` serão publicados automaticamente.
+Quando a implantação terminar, o endereço esperado é:
+https://lucksk-72.github.io/coleta-dos-reinos/
+
+Cada novo commit na branch `main` acionará uma nova publicação automaticamente. Se o site não aparecer, confira o resultado do fluxo em **Actions** e a configuração de **Settings → Pages**.
 
 ## Uso em sala de aula
 
