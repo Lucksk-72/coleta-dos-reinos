@@ -5,7 +5,13 @@ Jogo educativo de navegador para explorar a diversidade dos seres vivos e pratic
 **Jogue online:** quando o GitHub Pages estiver ativado, o endereço será  
 https://lucksk-72.github.io/coleta-dos-reinos/
 
-## O que há no jogo
+## Modos de jogo
+
+- **Modo Infantil** (`index.html`): captura por toque/clique, agora com rodadas iniciais de 45 segundos e mais tempo para observar cada organismo.
+- **Modo Jovem — Corrida da Biodiversidade** (`jovem.html`): protótipo de plataforma lateral com personagem correndo, saltos, obstáculos, coleta de organismos do reino-alvo, vidas, pontuação e revisão educativa ao final.
+- O modo jovem é uma primeira fase demonstrativa, com cenário de floresta e controles por teclado ou toque. O recorde fica salvo localmente no navegador.
+
+## O que há no modo infantil
 
 - Seleção de reino biológico e de cenário: floresta, oceano, deserto, Ártico e mundo microscópico.
 - Rodadas cronometradas, pontuação, combos e retorno imediato sobre acertos e erros.
