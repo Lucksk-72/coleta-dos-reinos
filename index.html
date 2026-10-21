@@ -24,10 +24,10 @@ main{margin-top:18px}.screen{display:none}.screen.active{display:block}.panel{ba
 <main>
 <section id="home" class="screen active">
  <div class="panel hero">
-  <div><div class="eyebrow">Missão de hoje: explorar a vida</div><p><button class="secondary" onclick="toggleSound()">🔊 Som: <span id="soundLabel">ligado</span></button></p><h2>Pequenos toques.<br>Grandes descobertas.</h2><p>Encontre os seres vivos que pertencem ao reino indicado. Acerte, forme combos, desbloqueie biomas e monte seu Catálogo Vivo!</p><button class="primary" onclick="showScreen('setup')">🚀 Começar aventura</button> <button class="secondary" onclick="showCatalog()">📚 Catálogo Vivo</button> <button class="secondary" onclick="showClassroom()">🧑‍🏫 Modo Aula</button></div>
+  <div><div class="eyebrow">Missão de hoje: explorar a vida</div><p><button class="secondary" onclick="toggleSound()">🔊 Som: <span id="soundLabel">ligado</span></button></p><h2>Pequenos toques.<br>Grandes descobertas.</h2><p>Encontre os seres vivos que pertencem ao reino indicado. Acerte, forme combos, desbloqueie biomas e monte seu Catálogo Vivo!</p><button class="primary" onclick="showScreen('setup')">🚀 Começar aventura</button> <a class="secondary" href="./jovem.html" style="display:inline-block;padding:12px 16px;border-radius:14px;text-decoration:none;font-weight:800">🏃 Modo Jovem: Corrida</a> <button class="secondary" onclick="showCatalog()">📚 Catálogo Vivo</button> <button class="secondary" onclick="showClassroom()">🧑‍🏫 Modo Aula</button></div>
   <div class="art"><span>🦋</span><span>🍄</span><span>🌿</span></div>
  </div>
- <div class="section-title"><h2>Como jogar</h2><span class="muted">30 segundos por rodada</span></div>
+ <div class="section-title"><h2>Como jogar</h2><span class="muted">45 segundos por rodada</span></div>
  <div class="panel"><p>🎯 <b>Objetivo:</b> toque ou clique apenas nos organismos do reino pedido.</p><p>✨ <b>Combo:</b> acertos seguidos aumentam seus pontos.</p><p>🧪 <b>Poderes:</b> use a lupa para destacar alvos ou congele a tela por alguns segundos.</p><p>🌱 <b>Aprenda:</b> cada descoberta entra no catálogo com uma curiosidade científica.</p><p>💾 <b>Progresso salvo:</b> XP, fase e catálogo ficam guardados neste navegador.</p></div>
 </section>
 <section id="setup" class="screen">
@@ -110,7 +110,7 @@ const organisms=[
 const SAVE_KEY='coletaDosReinosSaveV1';
 function loadSave(){try{return JSON.parse(localStorage.getItem(SAVE_KEY)||'{}')}catch(e){return {}}}
 const saved=loadSave();
-let selectedKingdom='animal',selectedBiome='forest',score=0,hits=0,misses=0,combo=0,bestCombo=0,timeLeft=30,gameTimer=null,spawnTimer=null,freezeTimeout=null,hints=2,freezes=1,active=false,xp=Number(saved.xp)||0,level=Number(saved.level)||1,stage=Number(saved.stage)||1,seen=new Set(Array.isArray(saved.seen)?saved.seen:[]),attempts=0,roundSeconds=30,soundOn=saved.soundOn!==false;
+let selectedKingdom='animal',selectedBiome='forest',score=0,hits=0,misses=0,combo=0,bestCombo=0,timeLeft=30,gameTimer=null,spawnTimer=null,freezeTimeout=null,hints=2,freezes=1,active=false,xp=Number(saved.xp)||0,level=Number(saved.level)||1,stage=Number(saved.stage)||1,seen=new Set(Array.isArray(saved.seen)?saved.seen:[]),attempts=0,roundSeconds=45,soundOn=saved.soundOn!==false;
 const $=id=>document.getElementById(id);
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));$(id).classList.add('active');}
 function saveProgress(){
@@ -132,7 +132,7 @@ function classReport(){
 }
 async function copyClassReport(){const report=classReport();try{await navigator.clipboard.writeText(report);showToast('Relatório copiado!')}catch(e){const ta=document.createElement('textarea');ta.value=report;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();showToast('Relatório copiado!')}}
 function downloadClassReport(){const blob=new Blob([classReport()],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='relatorio-coleta-dos-reinos.txt';a.click();URL.revokeObjectURL(url);showToast('Relatório preparado para baixar')}
-function nextStage(){stage++;selectedKingdom=kingdoms[(stage-1)%5].id;roundSeconds=Math.min(60,30+Math.floor((stage-1)/2)*5);buildChoices();saveProgress();syncHeader();showScreen('setup');showToast(`Fase ${stage}: novo desafio!`)}
+function nextStage(){stage++;selectedKingdom=kingdoms[(stage-1)%5].id;roundSeconds=Math.min(70,45+Math.floor((stage-1)/2)*5);buildChoices();saveProgress();syncHeader();showScreen('setup');showToast(`Fase ${stage}: novo desafio!`)}
 function buildChoices(){
  $('kingdomChoices').innerHTML=kingdoms.map(k=>`<button class="choice ${k.id===selectedKingdom?'selected':''}" onclick="selectKingdom('${k.id}')"><span class="emoji">${k.emoji}</span><strong>${k.name}</strong><small>${k.desc}</small></button>`).join('');
  $('biomeChoices').innerHTML=biomes.map(b=>`<button class="choice ${b.id===selectedBiome?'selected':''}" onclick="selectBiome('${b.id}')"><span class="emoji">${b.emoji}</span><strong>${b.name}</strong><small>${b.desc}</small></button>`).join('');
@@ -147,14 +147,14 @@ function startGame(){
  $('targetName').textContent=selectedKingdom==='todos'?'QUALQUER REINO':kingdoms.find(k=>k.id===selectedKingdom).name.toUpperCase();
  $('score').textContent='0';$('time').textContent=String(roundSeconds);$('feedback').textContent='Toque somente nos organismos corretos!';$('hintCount').textContent=hints;$('freezeCount').textContent=freezes;
  $('arena').className='arena '+selectedBiome;document.querySelectorAll('#arena .creature').forEach(e=>e.remove());$('sun').textContent=({forest:'☀️',ocean:'🫧',desert:'☀️',arctic:'❄️',micro:'🔬'})[selectedBiome];
- showScreen('game');spawnCreature();spawnTimer=setInterval(spawnCreature,850);
+ showScreen('game');spawnCreature();spawnTimer=setInterval(spawnCreature,1150);
  gameTimer=setInterval(()=>{if(!active)return;timeLeft--; $('time').textContent=timeLeft;$('timeBar').style.width=(timeLeft/roundSeconds*100)+'%';if(timeLeft<=0)endGame(false)},1000);
 }
 function spawnCreature(){
  if(!active)return;const arena=$('arena'),pool=poolForBiome();const o=pool[Math.floor(Math.random()*pool.length)];const el=document.createElement('button');el.className='creature';el.setAttribute('aria-label',o.name);el.innerHTML=`<span class="emoji">${o.emoji}</span><small>${o.name}</small>`;
  const maxX=Math.max(0,arena.clientWidth-88),maxY=Math.max(0,arena.clientHeight-92);el.style.left=(8+Math.random()*Math.max(0,maxX-16))+'px';el.style.top=(45+Math.random()*Math.max(0,maxY-45))+'px';
  el.onclick=()=>collect(el,o);arena.appendChild(el);
- setTimeout(()=>{if(el.isConnected)el.remove()},4800);
+ setTimeout(()=>{if(el.isConnected)el.remove()},6500);
 }
 function collect(el,o){
  if(!active||!el.isConnected)return;attempts++;
@@ -164,7 +164,7 @@ function collect(el,o){
  $('xpLabel').textContent=xp;level=1+Math.floor(xp/50);$('levelLabel').textContent=level;saveProgress();
 }
 function useHint(){if(!active||hints<=0)return;hints--;$('hintCount').textContent=hints;let found=false;document.querySelectorAll('#arena .creature').forEach(el=>{const name=el.getAttribute('aria-label'),o=organisms.find(x=>x.name===name);if(o&&isTarget(o)){el.style.outline='4px solid #ffca58';el.style.boxShadow='0 0 0 7px #ffca5866';found=true;}});$('feedback').textContent=found?'🔎 Alvos destacados por alguns segundos!':'🔎 Aguarde aparecer um organismo do reino-alvo.';setTimeout(()=>document.querySelectorAll('#arena .creature').forEach(el=>{el.style.outline='';el.style.boxShadow=''}),2200)}
-function useFreeze(){if(!active||freezes<=0)return;freezes--;$('freezeCount').textContent=freezes;const wasActive=active;clearInterval(spawnTimer);$('feedback').textContent='⏱️ Tempo de jogo congelado por 4 segundos!';const previous=gameTimer;clearInterval(previous);freezeTimeout=setTimeout(()=>{if(!active)return;gameTimer=setInterval(()=>{timeLeft--;$('time').textContent=timeLeft;$('timeBar').style.width=(timeLeft/roundSeconds*100)+'%';if(timeLeft<=0)endGame(false)},1000);spawnTimer=setInterval(spawnCreature,850);},4000)}
+function useFreeze(){if(!active||freezes<=0)return;freezes--;$('freezeCount').textContent=freezes;const wasActive=active;clearInterval(spawnTimer);$('feedback').textContent='⏱️ Tempo de jogo congelado por 4 segundos!';const previous=gameTimer;clearInterval(previous);freezeTimeout=setTimeout(()=>{if(!active)return;gameTimer=setInterval(()=>{timeLeft--;$('time').textContent=timeLeft;$('timeBar').style.width=(timeLeft/roundSeconds*100)+'%';if(timeLeft<=0)endGame(false)},1000);spawnTimer=setInterval(spawnCreature,1150);},4000)}
 function endGame(manual){
  if(!active)return;active=false;clearInterval(gameTimer);clearInterval(spawnTimer);clearTimeout(freezeTimeout);
  xp+=Math.max(0,Math.floor(score/10));level=1+Math.floor(xp/50);saveProgress();syncHeader();
