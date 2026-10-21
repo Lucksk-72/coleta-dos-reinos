@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101b36">
+<title>Corrida da Biodiversidade — Coleta dos Reinos</title>
+<style>
+:root{color-scheme:dark;--bg:#101b36;--panel:#192746;--mint:#a7f3d0;--gold:#ffd166;--pink:#ff7d9c;--text:#f3f7ff;--muted:#b9c7e4}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -10%,#31558a 0,transparent 55%),var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}button,select{font:inherit}button{cursor:pointer;border:0;border-radius:13px;padding:11px 16px;font-weight:800;transition:transform .12s,filter .12s}button:hover{filter:brightness(1.08);transform:translateY(-1px)}button:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:3px}.wrap{max-width:1100px;margin:auto;padding:18px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.brand{font-size:clamp(1.15rem,3vw,1.8rem);font-weight:950;letter-spacing:-.04em}.brand small{display:block;font-size:.8rem;letter-spacing:0;color:var(--muted);font-weight:600}.link{color:#d4e5ff;text-decoration:none;font-weight:750}.link:hover{text-decoration:underline}.panel{background:#192746eF;border:1px solid #ffffff1c;border-radius:24px;padding:clamp(17px,3vw,28px);box-shadow:0 18px 50px #050b1e66;margin-top:18px}.screen{display:none}.screen.active{display:block}.hero{display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:20px}.eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:.75rem;font-weight:900;color:var(--mint)}h1,h2,p{margin-top:0}h1{font-size:clamp(2rem,5vw,3.8rem);line-height:.98;letter-spacing:-.06em;margin:10px 0 16px}h2{letter-spacing:-.03em}.lead{color:var(--muted);line-height:1.65;font-size:1.05rem}.feature-art{min-height:220px;border-radius:20px;display:grid;place-items:center;font-size:clamp(4rem,12vw,7rem);background:linear-gradient(150deg,#1f6b78,#253f79 55%,#493a81);position:relative;overflow:hidden}.feature-art:after{content:"🌿　🍄　🦋";position:absolute;bottom:12px;font-size:1.7rem;letter-spacing:.4rem;white-space:nowrap}.primary{background:linear-gradient(135deg,#a7f3d0,#55d6b0);color:#10233a}.secondary{background:#304364;color:#f5f7ff}.danger{background:#63334c;color:#fff}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}.kingdoms{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:10px;margin:18px 0}.kingdom{background:#243657;border:2px solid transparent;color:white;text-align:left;padding:14px;border-radius:15px}.kingdom.selected{border-color:var(--mint);background:#21504f}.kingdom .emoji{display:block;font-size:1.7rem;margin-bottom:7px}.kingdom small{display:block;color:#c1d0e9;margin-top:4px}.instructions{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}.instructions div{padding:13px;background:#ffffff0a;border-radius:15px;color:var(--muted);font-size:.9rem;line-height:1.45}.instructions b{display:block;color:white;margin-bottom:4px}.hud{display:grid;grid-template-columns:1fr repeat(3,minmax(80px,auto));gap:9px;align-items:center}.objective,.stat{background:#253656;border-radius:13px;padding:10px 13px}.objective{font-weight:900;color:var(--gold)}.stat{text-align:center}.stat small{display:block;color:var(--muted);font-size:.72rem}.stat strong{font-size:1.25rem}.track{height:9px;border-radius:99px;background:#334665;margin:12px 0 14px;overflow:hidden}.track div{height:100%;width:100%;background:linear-gradient(90deg,var(--mint),var(--gold));transition:width .2s}.stage{position:relative;border:2px solid #ffffff20;border-radius:20px;overflow:hidden;background:#16264a}.stage canvas{display:block;width:100%;height:auto;aspect-ratio:960/420;touch-action:none}.game-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:13px}.message{font-weight:850;min-height:26px;color:var(--mint)}.controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.touch-controls{display:none;gap:10px;justify-content:center;margin-top:12px}.touch-controls button{min-width:75px;min-height:54px;font-size:1.15rem;background:#304364;color:white;touch-action:none}.result{text-align:center}.big{font-size:4rem}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:20px 0}.stats div{background:#253656;border-radius:15px;padding:16px}.stats strong{display:block;font-size:1.8rem}.stats span{color:var(--muted);font-size:.9rem}.review{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:9px;text-align:left}.review article{background:#ffffff0a;border-radius:13px;padding:12px}.review .emoji{font-size:1.6rem}.review p{font-size:.85rem;color:var(--muted);margin:5px 0 0}.note{color:var(--muted);font-size:.85rem;line-height:1.5}.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:700px){.hero{grid-template-columns:1fr}.feature-art{min-height:130px;order:-1}.hud{grid-template-columns:1fr 1fr}.objective{grid-column:1/-1}.instructions{grid-template-columns:1fr}.touch-controls{display:flex}.wrap{padding:12px}.stage canvas{aspect-ratio:4/3}.game-bottom{align-items:flex-start}.controls{width:100%}.controls button{flex:1}.stats{grid-template-columns:1fr 1fr}.stats div:last-child{grid-column:1/-1}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><div class="brand">🌎 COLETA DOS REINOS <small>Corrida da Biodiversidade · modo jovem</small></div><a class="link" href="./index.html">← Voltar ao modo infantil</a></header>
+<main>
+<section id="home" class="screen active">
+ <div class="panel hero"><div><div class="eyebrow">Missão científica · fase 1</div><h1>Corra. Observe.<br>Proteja a biodiversidade.</h1><p class="lead">Entre na trilha, colete os organismos do reino solicitado e desvie dos outros seres vivos e dos obstáculos. Cada acerto aumenta sua coleção; cada erro ensina algo.</p><div class="actions"><button class="primary" id="startSetup">🚀 Preparar missão</button><a class="link" style="padding:12px" href="./index.html">Jogar versão infantil</a></div></div><div class="feature-art" aria-hidden="true">🏃‍♂️</div></div>
+ <div class="panel"><h2>Como funciona</h2><div class="instructions"><div><b>🎯 Colete o alvo</b>Toque ou passe pelo organismo do reino indicado para pontuar.</div><div><b>↗️ Desvie</b>Salte por cima de troncos e pedras; evite organismos que não são o alvo.</div><div><b>🧠 Aprenda</b>Os acertos e erros mostram a classificação e uma explicação curta.</div></div><p class="note" style="margin-top:15px">Controles: ← → ou A/D para se mover; Espaço, ↑ ou W para saltar. No celular, use os botões de toque. A fase dura 60 segundos. O progresso é salvo apenas neste navegador.</p></div>
+</section>
+<section id="setup" class="screen">
+ <div class="panel"><div class="eyebrow">Planejamento de campo</div><h2>Escolha o reino da missão</h2><p class="lead">Leia o objetivo e identifique os organismos durante a corrida. A primeira versão inclui uma fase de floresta para testar a mecânica.</p>
+ <div class="kingdoms" id="kingdomChoices"></div><div class="actions"><button class="primary" id="launch">▶ Começar corrida</button><button class="secondary" id="backHome">Voltar</button></div><p class="note">Modelo didático simplificado: os cinco reinos são usados para fins de jogo e não representam todas as classificações científicas atuais.</p></div>
+</section>
+<section id="game" class="screen">
+ <div class="panel">
+  <div class="hud"><div class="objective">🎯 ALVO: <span id="targetName">ANIMAIS</span></div><div class="stat"><small>TEMPO</small><strong><span id="time">60</span>s</strong></div><div class="stat"><small>PONTOS</small><strong id="score">0</strong></div><div class="stat"><small>VIDAS</small><strong id="lives">❤️❤️❤️</strong></div></div>
+  <div class="track"><div id="timeBar"></div></div>
+  <div class="stage"><canvas id="world" width="960" height="420" aria-label="Jogo de plataforma: corra, salte e colete os organismos do reino indicado."></canvas></div>
+  <div class="game-bottom"><div class="message" id="message" aria-live="polite">Prepare-se para a corrida!</div><div class="controls"><button class="secondary" id="pause">⏸ Pausar</button><button class="danger" id="quit">Encerrar</button></div></div>
+  <div class="touch-controls" aria-label="Controles para celular"><button id="leftBtn" aria-label="Mover para a esquerda">◀</button><button id="jumpBtn" aria-label="Saltar">⬆ SALTAR</button><button id="rightBtn" aria-label="Mover para a direita">▶</button></div>
+  <p class="note" style="margin:12px 0 0">Dica: você não precisa capturar tudo. Observe o símbolo, identifique o reino e escolha o momento certo para saltar.</p>
+ </div>
+</section>
+<section id="result" class="screen"><div class="panel result"><div class="big" id="resultEmoji">🏆</div><div class="eyebrow">Relatório da expedição</div><h2 id="resultTitle">Missão concluída!</h2><p class="lead" id="resultText"></p><div class="stats"><div><strong id="finalScore">0</strong><span>Pontos</span></div><div><strong id="finalHits">0</strong><span>Alvos coletados</span></div><div><strong id="finalAccuracy">0%</strong><span>Precisão</span></div></div><h2>O que você descobriu</h2><div class="review" id="review"></div><div class="actions" style="justify-content:center"><button class="primary" id="again">🔁 Jogar novamente</button><button class="secondary" id="changeTarget">Trocar reino</button><a class="link" style="padding:12px" href="./index.html">Modo infantil</a></div></div></section>
+</main>
+<p class="note" style="text-align:center;margin:18px 0">Coleta dos Reinos · protótipo experimental · sem anúncios, conta ou envio de dados pessoais.</p>
+</div>
+<script>
+'use strict';
+const kingdoms=[
+ {id:'animal',name:'Animais',emoji:'🦊',desc:'Seres que se alimentam de outros organismos'},
+ {id:'planta',name:'Plantas',emoji:'🌿',desc:'Em geral, fazem fotossíntese'},
+ {id:'fungo',name:'Fungos',emoji:'🍄',desc:'Absorvem nutrientes do ambiente'},
+ {id:'protista',name:'Protistas',emoji:'🦠',desc:'Grupo didático diverso, em geral microscópico'},
+ {id:'bacteria',name:'Bactérias',emoji:'🧫',desc:'Organismos procariontes'},
+ {id:'todos',name:'Todos os reinos',emoji:'🌎',desc:'Desafio: qualquer organismo é alvo'}
+];
+const organisms=[
+ {id:'borboleta',name:'Borboleta',emoji:'🦋',kingdom:'animal',fact:'As borboletas têm sensores de sabor nas patas.'},
+ {id:'raposa',name:'Raposa',emoji:'🦊',kingdom:'animal',fact:'A audição aguçada ajuda raposas a localizar presas.'},
+ {id:'coruja',name:'Coruja',emoji:'🦉',kingdom:'animal',fact:'Muitas corujas localizam sons com grande precisão.'},
+ {id:'tartaruga',name:'Tartaruga',emoji:'🐢',kingdom:'animal',fact:'Tartarugas vivem em ambientes marinhos, de água doce ou terrestres, conforme a espécie.'},
+ {id:'cacto',name:'Cacto',emoji:'🌵',kingdom:'planta',fact:'Muitos cactos armazenam água em seus tecidos.'},
+ {id:'samambaia',name:'Samambaia',emoji:'🌿',kingdom:'planta',fact:'Samambaias se reproduzem por esporos, não por sementes.'},
+ {id:'flor',name:'Flor',emoji:'🌼',kingdom:'planta',fact:'Flores podem atrair polinizadores com cores, formas e aromas.'},
+ {id:'arvore',name:'Árvore',emoji:'🌳',kingdom:'planta',fact:'Árvores oferecem abrigo e alimento a muitos organismos.'},
+ {id:'cogumelo',name:'Cogumelo',emoji:'🍄',kingdom:'fungo',fact:'O cogumelo é uma estrutura reprodutiva de certos fungos.'},
+ {id:'bolor',name:'Bolor',emoji:'🟢',kingdom:'fungo',fact:'Muitos bolores formam filamentos e produzem esporos.'},
+ {id:'levedura',name:'Levedura',emoji:'🧁',kingdom:'fungo',fact:'Leveduras são fungos unicelulares; algumas são usadas no pão.'},
+ {id:'ameba',name:'Ameba',emoji:'🫧',kingdom:'protista',fact:'Amebas podem se deslocar usando extensões chamadas pseudópodes.'},
+ {id:'paramécio',name:'Paramécio',emoji:'🦠',kingdom:'protista',fact:'Paramécios usam pequenos cílios para se locomover na água.'},
+ {id:'alga',name:'Alga',emoji:'🪸',kingdom:'protista',fact:'Algas de muitos grupos fazem fotossíntese.'},
+ {id:'bacteria',name:'Bactéria',emoji:'🧫',kingdom:'bacteria',fact:'Bactérias vivem em muitos ambientes; muitas são úteis.'},
+ {id:'ciano',name:'Cianobactéria',emoji:'🔵',kingdom:'bacteria',fact:'Cianobactérias realizam fotossíntese e têm papel importante na história da vida.'}
+];
+const $=id=>document.getElementById(id), canvas=$('world'),ctx=canvas.getContext('2d');
+const SAVE='coletaDosReinosYouthV1';
+let target='animal',screen='home',running=false,paused=false,raf=0,last=0,elapsed=0,timeLeft=60,score=0,hits=0,wrong=0,lives=3,combo=0,attempts=0,worldX=0,spawnClock=0,obstacleClock=0,player,items=[],seen=new Set(),feedbackTimer=0;
+let best=0;try{best=Number(JSON.parse(localStorage.getItem(SAVE)||'{}').best)||0}catch(e){}
+function show(id){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));$(id).classList.add('active');screen=id}
+function setupChoices(){ $('kingdomChoices').innerHTML=kingdoms.map(k=>'<button class="kingdom '+(target===k.id?'selected':'')+'" data-id="'+k.id+'"><span class="emoji">'+k.emoji+'</span><strong>'+k.name+'</strong><small>'+k.desc+'</small></button>').join('');$('kingdomChoices').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{target=b.dataset.id;setupChoices()}));}
+function isTarget(o){return target==='todos'||o.kingdom===target}
+function targetObj(){return kingdoms.find(k=>k.id===target)}
+function begin(){cancelAnimationFrame(raf);running=true;paused=false;elapsed=0;timeLeft=60;score=0;hits=0;wrong=0;lives=3;combo=0;attempts=0;worldX=0;spawnClock=.8;obstacleClock=2;items=[];seen=new Set();player={x:145,y:300,w:42,h:58,vy:0,onGround:true,move:0};$('targetName').textContent=targetObj().name.toUpperCase();$('time').textContent='60';$('score').textContent='0';$('lives').textContent='❤️❤️❤️';$('timeBar').style.width='100%';$('message').textContent='Corra e observe os organismos!';$('pause').textContent='⏸ Pausar';show('game');last=performance.now();raf=requestAnimationFrame(loop)}
+function end(){if(!running)return;running=false;paused=false;cancelAnimationFrame(raf);best=Math.max(best,score);try{localStorage.setItem(SAVE,JSON.stringify({best}))}catch(e){}$('resultEmoji').textContent=score>=100?'🏆':hits>=5?'🔬':'🌱';$('resultTitle').textContent=score>=100?'Explorador de elite!':hits>=5?'Boa expedição!':'Toda descoberta conta';$('resultText').textContent='Você coletou '+hits+' alvo(s), tocou em '+wrong+' organismo(s) de outro reino e terminou com '+lives+' vida(s). Recorde neste navegador: '+best+' pontos.';$('finalScore').textContent=score;$('finalHits').textContent=hits;$('finalAccuracy').textContent=(attempts?Math.round(hits/attempts*100):0)+'%';const arr=[...seen].map(id=>organisms.find(o=>o.id===id)).filter(Boolean);$('review').innerHTML=arr.length?arr.map(o=>'<article><div class="emoji">'+o.emoji+'</div><strong>'+o.name+' · '+kingdoms.find(k=>k.id===o.kingdom).name+'</strong><p>'+o.fact+'</p></article>').join(''):'<article><strong>Próxima tentativa</strong><p>Observe o reino-alvo e experimente saltar para evitar os organismos que não correspondem à missão.</p></article>';show('result')}
+function jump(){if(!running||paused)return;if(player.onGround){player.vy=-590;player.onGround=false}}
+function move(dir){if(player)player.move=dir}
+function message(t){$('message').textContent=t}
+function spawn(){const correct=target==='todos'||Math.random()<.56;let pool=correct?organisms.filter(o=>target==='todos'||o.kingdom===target):organisms.filter(o=>o.kingdom!==target);if(!pool.length)pool=organisms;const o=pool[Math.floor(Math.random()*pool.length)];items.push({type:'organism',o,x:canvas.width+30,y:308,w:42,h:42,done:false,phase:Math.random()*6});}
+function obstacle(){items.push({type:'obstacle',x:canvas.width+30,y:330,w:38+Math.random()*18,h:30+Math.random()*12,done:false,kind:Math.random()<.5?'🪵':'🪨'});}
+function update(dt){elapsed+=dt;timeLeft=Math.max(0,60-elapsed);$('time').textContent=Math.ceil(timeLeft);$('timeBar').style.width=(timeLeft/60*100)+'%';const speed=270+Math.min(elapsed*3,120);worldX+=speed*dt;player.x+=player.move*270*dt;player.x=Math.max(28,Math.min(canvas.width*.62,player.x));player.vy+=1450*dt;player.y+=player.vy*dt;if(player.y+player.h>=358){player.y=358-player.h;player.vy=0;player.onGround=true}spawnClock-=dt;obstacleClock-=dt;if(spawnClock<=0){spawn();spawnClock=1.15+Math.random()*.55}if(obstacleClock<=0){obstacle();obstacleClock=2.2+Math.random()*1.4}for(const it of items){it.x-=speed*dt;if(it.type==='organism')it.y=308+Math.sin(elapsed*4+it.phase)*5;if(it.done)continue;const px=player.x+8,py=player.y+5,pw=player.w-16,ph=player.h-7;if(px<it.x+it.w&&px+pw>it.x&&py<it.y+it.h&&py+ph>it.y){it.done=true;attempts++;if(it.type==='obstacle'){lives--;score=Math.max(0,score-8);combo=0;$('lives').textContent='❤️'.repeat(lives)+'🤍'.repeat(3-lives);message('⚠️ Obstáculo! Salte com espaço, ↑ ou ⬆. −8 pontos');}else if(isTarget(it.o)){hits++;combo++;score+=10+Math.min(combo,8);seen.add(it.o.id);message('✅ '+it.o.name+' — '+kingdoms.find(k=>k.id===it.o.kingdom).name+'! +'+(10+Math.min(combo-1,8))+' pontos. '+it.o.fact)}else{wrong++;lives--;combo=0;score=Math.max(0,score-5);$('lives').textContent='❤️'.repeat(lives)+'🤍'.repeat(3-lives);message('↩️ '+it.o.name+' pertence a '+kingdoms.find(k=>k.id===it.o.kingdom).name+'. Desvie! −5 pontos');}}}items=items.filter(i=>!i.done&&i.x>-90);$('score').textContent=score;if(lives<=0||timeLeft<=0)end()}
+function roundRect(x,y,w,h,r,fill){ctx.fillStyle=fill;ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fill()}
+function draw(){const w=canvas.width,h=canvas.height;const sky=ctx.createLinearGradient(0,0,0,h);sky.addColorStop(0,'#244b78');sky.addColorStop(1,'#76c7b5');ctx.fillStyle=sky;ctx.fillRect(0,0,w,h);
+ // distant mountains and layered forest
+ ctx.fillStyle='#456b88';ctx.beginPath();ctx.moveTo(0,265);for(let x=0;x<=w;x+=100)ctx.lineTo(x,175+Math.sin(x*.018+worldX*.001)*40);ctx.lineTo(w,h);ctx.lineTo(0,h);ctx.fill();
+ for(let i=0;i<12;i++){const x=((i*110-worldX*.25)%(w+130)+w+130)%(w+130)-40;ctx.fillStyle=i%2?'#276b69':'#2c8275';ctx.beginPath();ctx.arc(x,250,45,0,Math.PI*2);ctx.fill();ctx.fillRect(x-20,245,40,120)}
+ ctx.fillStyle='#295447';ctx.fillRect(0,358,w,62);ctx.fillStyle='#4ca36e';ctx.fillRect(0,358,w,7);
+ for(let x=-(worldX%70);x<w;x+=70){ctx.fillStyle='#a6d99b';ctx.fillRect(x,378,30,4);ctx.fillRect(x+30,397,20,3)}
+ // distant glowing fireflies
+ for(let i=0;i<14;i++){const x=((i*83-worldX*.12)%(w+30)+w+30)%(w+30);ctx.fillStyle='#fff4ae';ctx.globalAlpha=.5+Math.sin(elapsed*2+i)*.3;ctx.beginPath();ctx.arc(x,100+(i*47)%160,2.5,0,Math.PI*2);ctx.fill()}ctx.globalAlpha=1;
+ // player shadow
+ ctx.fillStyle='#153b3c66';ctx.beginPath();ctx.ellipse(player.x+22,359,27,6,0,0,Math.PI*2);ctx.fill();
+ const run=Math.sin(elapsed*18)*(player.onGround?5:1);ctx.save();ctx.translate(player.x,player.y);
+ // backpack
+ roundRect(0+3,22,14,24,5,'#d97735');
+ // legs
+ ctx.strokeStyle='#172d47';ctx.lineWidth=8;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(20,45);ctx.lineTo(17+run,57);ctx.moveTo(29,45);ctx.lineTo(32-run,57);ctx.stroke();
+ // body
+ roundRect(9,17,27,31,8,'#f6c65b');roundRect(14,20,17,23,5,'#2b7b70');
+ // head and face
+ ctx.fillStyle='#d99769';ctx.beginPath();ctx.arc(24,12,14,0,Math.PI*2);ctx.fill();
+ ctx.fillStyle='#23324c';ctx.beginPath();ctx.arc(29,11,2,0,Math.PI*2);ctx.fill();
+ ctx.strokeStyle='#9b5d43';ctx.lineWidth=2;ctx.beginPath();ctx.arc(28,16,4,.2,1.8);ctx.stroke();
+ // cap
+ ctx.fillStyle='#ff795e';ctx.beginPath();ctx.arc(23,7,14,Math.PI,Math.PI*2);ctx.fill();roundRect(22,5,19,5,3,'#ff795e');
+ // arm swing
+ ctx.strokeStyle='#d99769';ctx.lineWidth=7;ctx.beginPath();ctx.moveTo(13,24);ctx.lineTo(5-run,33);ctx.moveTo(33,24);ctx.lineTo(39+run,31);ctx.stroke();
+ ctx.restore();
+ for(const it of items){if(it.done)continue;if(it.type==='organism'){ctx.save();ctx.shadowColor='#c9fff0';ctx.shadowBlur=12;ctx.font='34px "Apple Color Emoji","Segoe UI Emoji",sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(it.o.emoji,it.x+it.w/2,it.y+it.h/2);ctx.restore();ctx.fillStyle='#10233add';roundRect(it.x-8,it.y+35,58,19,8,'#10233add');ctx.fillStyle='#fff';ctx.font='bold 10px system-ui';ctx.textAlign='center';ctx.fillText(it.o.name,it.x+21,it.y+48)}else{ctx.font='36px "Apple Color Emoji","Segoe UI Emoji",sans-serif';ctx.textAlign='center';ctx.fillText(it.kind,it.x+it.w/2,it.y+it.h/2)}}
+ if(paused){ctx.fillStyle='#071326bb';ctx.fillRect(0,0,w,h);ctx.fillStyle='#fff';ctx.font='900 42px system-ui';ctx.textAlign='center';ctx.fillText('PAUSADO',w/2,h/2-5);ctx.font='18px system-ui';ctx.fillText('Pressione continuar para voltar à corrida',w/2,h/2+30)}
+}
+function loop(now){if(!running)return;raf=requestAnimationFrame(loop);if(paused){draw();return}const dt=Math.min((now-last)/1000,.04);last=now;update(dt);if(running)draw()}
+function togglePause(){if(!running)return;paused=!paused;$('pause').textContent=paused?'▶ Continuar':'⏸ Pausar';if(!paused)last=performance.now();message(paused?'Jogo pausado.':'A corrida continua!')}
+function bindHold(id,dir){const b=$(id);const down=e=>{e.preventDefault();move(dir)},up=e=>{e.preventDefault();if(player&&player.move===dir)move(0)};b.addEventListener('pointerdown',down);['pointerup','pointercancel','pointerleave'].forEach(ev=>b.addEventListener(ev,up))}
+window.addEventListener('keydown',e=>{if(['ArrowLeft','ArrowRight','ArrowUp',' ','a','A','d','D','w','W'].includes(e.key)&&screen==='game')e.preventDefault();if(e.repeat)return;if(e.key==='ArrowLeft'||e.key.toLowerCase()==='a')move(-1);if(e.key==='ArrowRight'||e.key.toLowerCase()==='d')move(1);if(e.key===' '||e.key==='ArrowUp'||e.key.toLowerCase()==='w')jump();if(e.key==='Escape')togglePause()});
+window.addEventListener('keyup',e=>{if(['ArrowLeft','ArrowRight','a','A','d','D'].includes(e.key))move(0)});
+$('startSetup').addEventListener('click',()=>{setupChoices();show('setup')});$('backHome').addEventListener('click',()=>show('home'));$('launch').addEventListener('click',begin);$('pause').addEventListener('click',togglePause);$('quit').addEventListener('click',end);$('again').addEventListener('click',begin);$('changeTarget').addEventListener('click',()=>{setupChoices();show('setup')});$('leftBtn').addEventListener('pointerdown',e=>{e.preventDefault();move(-1)});$('rightBtn').addEventListener('pointerdown',e=>{e.preventDefault();move(1)});['leftBtn','rightBtn'].forEach(id=>['pointerup','pointercancel','pointerleave'].forEach(ev=>$(id).addEventListener(ev,()=>move(0))));$('jumpBtn').addEventListener('pointerdown',e=>{e.preventDefault();jump()});
+setupChoices();
+</script>
+</body>
+</html>
