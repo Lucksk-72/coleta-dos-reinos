@@ -2,8 +2,8 @@
 
 Jogo educativo de navegador para explorar a diversidade dos seres vivos e praticar sua classificação. Desenvolvido em HTML, CSS e JavaScript, sem bibliotecas externas nem servidor próprio.
 
-**Jogue online:** quando o GitHub Pages estiver ativado, o endereço será  
-https://lucksk-72.github.io/coleta-dos-reinos/
+**Jogue online:** https://lucksk-72.github.io/coleta-dos-reinos/  
+**Modo Jovem — Corrida da Biodiversidade:** https://lucksk-72.github.io/coleta-dos-reinos/jovem.html
 
 ## Modos de jogo
 
@@ -25,10 +25,11 @@ https://lucksk-72.github.io/coleta-dos-reinos/
 ## Como jogar
 
 1. Abra o jogo no navegador.
-2. Escolha o reino ou o desafio com todos os reinos e selecione um cenário.
-3. Durante a rodada, selecione os organismos que correspondem ao reino escolhido.
-4. Use a lupa quando precisar de ajuda e consulte o Catálogo Vivo para rever as descobertas.
-5. No Modo Aula, gere um relatório resumido da atividade naquele navegador.
+2. Na página inicial, escolha o Modo Infantil ou abra **Modo Jovem: Corrida**.
+3. No modo infantil, selecione um reino e um cenário; durante a rodada, toque apenas nos organismos do reino-alvo.
+4. No modo jovem, escolha o reino-alvo, mova o personagem, salte obstáculos e desvie dos organismos que não correspondem à missão.
+5. Consulte o Catálogo Vivo (infantil) ou a revisão de descobertas ao final da corrida (jovem).
+6. No Modo Aula, gere um relatório resumido da atividade naquele navegador.
 
 ## Executar ou hospedar
 
