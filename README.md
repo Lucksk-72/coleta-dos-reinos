@@ -8,8 +8,8 @@ Jogo educativo de navegador para explorar a diversidade dos seres vivos e pratic
 ## Modos de jogo
 
 - **Modo Infantil** (`index.html`): captura por toque/clique, agora com rodadas iniciais de 45 segundos e mais tempo para observar cada organismo.
-- **Modo Jovem — Corrida da Biodiversidade** (`jovem.html`): protótipo de plataforma lateral com personagem correndo, saltos, obstáculos, coleta de organismos do reino-alvo, vidas, pontuação e revisão educativa ao final.
-- O modo jovem é uma primeira fase demonstrativa, com cenário de floresta e controles por teclado ou toque. O recorde fica salvo localmente no navegador.
+- **Modo Jovem — Corrida da Biodiversidade** (`jovem.html`): campanha de cinco fases, com 3 minutos por fase (15 minutos de jogo), uma para cada reino didático. Inclui personagem correndo, saltos, obstáculos, coleta de organismos do reino-alvo, vidas, pontuação e revisão educativa ao final.
+- No modo jovem, a campanha percorre os cinco reinos; é possível escolher por qual começar, e as outras fases seguem em sequência automática. Cada transição apresenta o novo objetivo. O cenário inicial é uma floresta, com controles por teclado ou toque. O recorde fica salvo localmente no navegador.
 
 ## O que há no modo infantil
 
